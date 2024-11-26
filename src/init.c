@@ -1,5 +1,5 @@
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 int parse_args(t_data *data, int argc, char **argv)
 {

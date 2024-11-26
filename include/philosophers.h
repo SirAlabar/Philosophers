@@ -22,6 +22,7 @@
 
 # define SUCCESS 0
 # define ERROR 1
+# define MAX_PHILOS 200
 
 // Colors for status messages
 # define RED "\033[0;31m"

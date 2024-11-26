@@ -1,5 +1,5 @@
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 long long time_diff(long long past, long long present)
 {
