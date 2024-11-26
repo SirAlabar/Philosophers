@@ -20,3 +20,12 @@ void precise_slepp(long long time)
         usleep(100);
     }
 }
+
+long long get time(void)
+{
+    struct timeval time;
+
+    if (gettimeofday(&time, NULL) == -1)
+        return (error_msg("gettimeofday() failed"));
+    return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}

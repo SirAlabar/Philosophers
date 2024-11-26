@@ -12,12 +12,7 @@
 
 #include "../include/philosophers.h"
 
-static int	ft_isdigit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-static int	is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
 	int	i;
 
@@ -30,14 +25,14 @@ static int	is_valid_number(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int	check_limits(char *str)
+int	check_limits(char *str)
 {
 	long	num;
 	int		i;
@@ -56,7 +51,7 @@ static int	check_limits(char *str)
 	return (1);
 }
 
-static int	check_philo_number(char *str)
+int	check_philo_number(char *str)
 {
 	int	num;
 
@@ -68,7 +63,7 @@ static int	check_philo_number(char *str)
 	return (SUCCESS);
 }
 
-static void	check_min_values(char **argv)
+void	check_min_values(char **argv)
 {
 	if (ft_atoi(argv[2]) < 61)
 		printf("%sWarning: time_to_die below 60ms might cause timing issues%s\n",

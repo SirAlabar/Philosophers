@@ -74,13 +74,30 @@ typedef struct s_data
 
 
 //init.c
+int parse_args(t_data *data, int argc, char **argv);
+int init_philosophers(t_data *data);
+int init_mutex(t_data *data);
+int init_data (t_data *data, int argc, char **argv);
 
+//check_args
+int	is_valid_number(char *str);
+int	check_limits(char *str);
+int	check_philo_number(char *str);
+void	check_min_values(char **argv);
+int	check_args(int argc, char **argv);
 
 //main.c
 
 //monitor.c
 
+//time.c
+long long time_diff(long long past, long long present);
+void precise_slepp(long long time);
+long long get_time(void);
+
 //utils.c
 int	ft_atoi(const char *str);
 int error_msg(char *str);
-long long get time(void);
+
+
+#endif

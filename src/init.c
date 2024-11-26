@@ -12,16 +12,16 @@ int parse_args(t_data *data, int argc, char **argv)
     data->must_eat = -1;
     if (argc == 6)
         data->must_eat = ft_atoi(argv[5]);
-    if(data->num_philos <= 0 || data->time to die <= 0
-    || data->time_to_eat <= 0 || data->time_to_sleep <= 0|
-    || (argv == 6 && data->must_eat <= 0))
+    if(data->num_philos <= 0 || data->time_to_die <= 0
+    || data->time_to_eat <= 0 || data->time_to_sleep <= 0
+    || (argc == 6 && data->must_eat <= 0))
         return(error_msg("invalid argument values."));
-    return (SUCESS);    
+    return (SUCCESS);    
 }
 
 int init_data (t_data *data, int argc, char **argv)
 {
-    if(parse_args(data, argc, argv) != SUCESS)
+    if(parse_args(data, argc, argv) != SUCCESS)
         return(ERROR);
     data->someone_died = false;
     data->start_time = get_time();
@@ -36,7 +36,7 @@ int init_data (t_data *data, int argc, char **argv)
         free(data->philosophers);
         return (error_msg("malloc failed for forks"));
     }
-    return (SUCESS);
+    return (SUCCESS);
 }
 
 int init_mutex(t_data *data)
@@ -61,7 +61,7 @@ int init_mutex(t_data *data)
             pthread_mutex_destroy(&data->forks[i]);
         return (error_msg("death mutex initialization failed"));   
     }
-    return (SUCESS);
+    return (SUCCESS);
 }
 
 int init_philosophers(t_data *data)
@@ -79,5 +79,5 @@ int init_philosophers(t_data *data)
         data->philosophers[i].left_fork = &data->forks[i];
         data->philosophers[i].right_fork = &data->forks[(i + 1) % data->num_philos];
     }
-    return (SUCESS);
+    return (SUCCESS);
 }

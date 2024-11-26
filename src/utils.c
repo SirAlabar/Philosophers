@@ -32,11 +32,3 @@ int error_msg(char *str)
     return (ERROR);
 }
 
-long long get time(void)
-{
-    struct timeval time;
-
-    if (gettimeofday(&time, NULL) == -1)
-        return (error_msg("gettimeofday() failed"));
-    return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
