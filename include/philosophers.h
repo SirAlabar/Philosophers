@@ -70,3 +70,16 @@ typedef struct s_data
     pthread_mutex_t death_mutex;    // Mutex for checking death condition
     t_philo         *philosophers;  // Array of philosopher structures
 }   t_data;
+
+
+//init.c
+
+
+//main.c
+
+//monitor.c
+
+//utils.c
+int	ft_atoi(const char *str);
+int error_msg(char *str);
+long long get time(void);
