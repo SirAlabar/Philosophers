@@ -47,7 +47,7 @@ int eat(t_philo *philo)
     return (SUCCESS);
 }
 
-int sleep_and_think
+int	sleep_and_think(t_philo *philo)
 {
 	print_status(philo, SLEEPING);
 	precise_sleep(philo->data->time_to_sleep);
