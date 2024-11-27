@@ -91,6 +91,14 @@ int	check_args(int argc, char **argv);
 
 //monitor.c
 
+//routines.c
+int take_forks(t_philo *philo);
+void drop_forks(t_philo *philo);
+int eat(t_philo *philo);
+int	sleep_and_think(t_philo *philo);
+void	*philosopher_routine(void *philosopher_void);
+
+
 //status.c
 bool	check_death(t_data *data);
 void print_status(t_philo *philo, t_state state);
