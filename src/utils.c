@@ -31,4 +31,3 @@ int error_msg(char *str)
     printf("%s Error: %s%s\n", RED, str, RESET);
     return (ERROR);
 }
-

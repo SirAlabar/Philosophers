@@ -19,6 +19,7 @@
 # include <pthread.h>    // pthread functions
 # include <sys/time.h>   // gettimeofday
 # include <stdbool.h>    // bool type
+# include <limits.h>     // for limits
 
 # define SUCCESS 0
 # define ERROR 1
@@ -89,6 +90,11 @@ int	check_args(int argc, char **argv);
 //main.c
 
 //monitor.c
+
+//status.c
+bool	check_death(t_data *data);
+void print_status(t_philo *philo, t_state state);
+void	clean_up(t_data *data);
 
 //time.c
 long long time_diff(long long past, long long present);

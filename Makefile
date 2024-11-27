@@ -32,7 +32,8 @@ SRCS = $(addprefix $(SRCS_DIR)/, \
 	main.c \
 	init.c \
 	utils.c \
-	routine.c \
+	check_args.c \
+	status.c \
 	monitor.c \
 	time.c)
 

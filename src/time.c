@@ -21,7 +21,7 @@ void precise_slepp(long long time)
     }
 }
 
-long long get time(void)
+long long get_time(void)
 {
     struct timeval time;
 
