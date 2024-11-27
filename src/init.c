@@ -68,6 +68,15 @@ int init_mutex(t_data *data)
            pthread_mutex_destroy(&data->forks[i]);
        return (error_msg("death mutex initialization failed"));
    }
+    if(pthread_mutex_init(&data->last_meal_mutex, NULL) != 0)
+    {
+        pthread_mutex_destroy(&data->death_mutex);
+        pthread_mutex_destroy(&data->print_mutex);
+        i = -1;
+        while(++i < data->num_philos)
+            pthread_mutex_destroy(&data->forks[i]);
+        return (error_msg("last_meal mutex initialization failed"));
+    }   
    return (SUCCESS);
 }
 

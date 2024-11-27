@@ -42,7 +42,9 @@ void drop_forks(t_philo *philo)
 int eat(t_philo *philo)
 {
     print_status(philo, EATING);
+    pthread_mutex_lock(&philo->data->last_meal_mutex);
     philo->last_meal = get_time();
+    pthread_mutex_unlock(&philo->data->last_meal_mutex);
     precise_sleep(philo->data->time_to_eat);
     philo->meals_eaten++;
     drop_forks(philo);

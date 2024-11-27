@@ -40,13 +40,17 @@ void	*monitor_routine(void *data_void)
        i = -1;
        while (++i < data->num_philos)
        {
-           time = time_diff(data->philosophers[i].last_meal, get_time());
+            pthread_mutex_lock(&data->last_meal_mutex);
+            time = time_diff(data->philosophers[i].last_meal, get_time());
+            pthread_mutex_unlock(&data->last_meal_mutex);
            if (time >= data->time_to_die && !check_death(data))
            {
                pthread_mutex_lock(&data->death_mutex);
                data->someone_died = true;
                pthread_mutex_unlock(&data->death_mutex);
+               pthread_mutex_lock(&data->print_mutex); 
                printf("%lld %d died\n", time_diff(data->start_time, get_time()), data->philosophers[i].id);
+               pthread_mutex_unlock(&data->print_mutex);
                return (NULL);
            }
        }
