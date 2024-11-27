@@ -57,5 +57,7 @@ void	clean_up(t_data *data)
 		pthread_mutex_destroy(&data->death_mutex);
 		free(data->philosophers);
 		free(data->forks);
+        data->philosophers = NULL;
+        data->forks = NULL;		
 	}
 }
