@@ -12,16 +12,18 @@
 
 #include "../include/philosophers.h"
 
-static int	start_simulation(t_data *data)
+static int	start_threads(t_data *data)
 {
 	pthread_t	monitor;
 	int			i;
 
+	data->start_time = get_time();
 	i = -1;
 	while (++i < data->num_philos)
 	{
+		data->philosophers[i].last_meal = data->start_time;
 		if (pthread_create(&data->philosophers[i].thread, NULL,
-			philosopher_routine, &data->philosophers[i]) != 0)
+				philosopher_routine, &data->philosophers[i]) != 0)
 			return (error_msg("thread creation failed"));
 	}
 	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
@@ -30,6 +32,16 @@ static int	start_simulation(t_data *data)
 	while (++i < data->num_philos)
 		pthread_join(data->philosophers[i].thread, NULL);
 	pthread_join(monitor, NULL);
+	return (SUCCESS);
+}
+
+static int	handle_one_philo(t_data *data)
+{
+	data->start_time = get_time();
+	data->philosophers[0].last_meal = data->start_time;
+	print_status(&data->philosophers[0], FORK_TAKEN);
+	precise_sleep(data->time_to_die);
+	print_status(&data->philosophers[0], DIED);
 	return (SUCCESS);
 }
 
@@ -45,7 +57,9 @@ int	main(int argc, char **argv)
 		return (clean_up(&data), ERROR);
 	if (init_philosophers(&data) != SUCCESS)
 		return (clean_up(&data), ERROR);
-	if (start_simulation(&data) != SUCCESS)
+	if (data.num_philos == 1)
+		handle_one_philo(&data);
+	else if (start_threads(&data) != SUCCESS)
 		return (clean_up(&data), ERROR);
 	clean_up(&data);
 	return (SUCCESS);

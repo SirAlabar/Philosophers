@@ -14,8 +14,10 @@
 
 int take_forks(t_philo *philo)
 {
-    if (philo->id % 2)
-    {
+	if (philo->id % 2)
+		usleep(100);
+	if (philo->id == 1)
+	{
         pthread_mutex_lock(philo->left_fork);
         print_status(philo, FORK_TAKEN);
         pthread_mutex_lock(philo->right_fork);
@@ -61,7 +63,7 @@ void	*philosopher_routine(void *philosopher_void)
 
 	philo = (t_philo *)philosopher_void;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(500);
 	while (!check_death(philo->data))
 	{
 		if (take_forks(philo) != SUCCESS)
@@ -70,6 +72,7 @@ void	*philosopher_routine(void *philosopher_void)
 			break ;
 		if (sleep_and_think(philo) != SUCCESS)
 			break ;
+       	usleep(100); 
 	}
 	return (NULL);
 }
