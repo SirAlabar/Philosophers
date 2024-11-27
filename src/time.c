@@ -6,7 +6,7 @@ long long time_diff(long long past, long long present)
     return (present - past);
 }
 
-void precise_slepp(long long time)
+void precise_sleep(long long time)
 {
     long long start;
     long long elapsed;

@@ -23,7 +23,7 @@ int take_forks(t_philo *philo)
     }
     else
     {
-        pthread_mutex_lock(philo->right_fork)
+        pthread_mutex_lock(philo->right_fork);
         print_status(philo, FORK_TAKEN);
         pthread_mutex_lock(philo->left_fork);
         print_status(philo, FORK_TAKEN);
@@ -39,9 +39,9 @@ void drop_forks(t_philo *philo)
 
 int eat(t_philo *philo)
 {
-    print_status(philp, EATING);
-    philo->last_meal 0 get_time();
-    precise_slepp(philo->data->time_to_eat);
+    print_status(philo, EATING);
+    philo->last_meal = get_time();
+    precise_sleep(philo->data->time_to_eat);
     philo->meals_eaten++;
     drop_forks(philo);
     return (SUCCESS);

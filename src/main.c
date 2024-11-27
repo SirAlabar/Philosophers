@@ -12,6 +12,27 @@
 
 #include "../include/philosophers.h"
 
+static int	start_simulation(t_data *data)
+{
+	pthread_t	monitor;
+	int			i;
+
+	i = -1;
+	while (++i < data->num_philos)
+	{
+		if (pthread_create(&data->philosophers[i].thread, NULL,
+			philosopher_routine, &data->philosophers[i]) != 0)
+			return (error_msg("thread creation failed"));
+	}
+	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
+		return (error_msg("monitor thread creation failed"));
+	i = -1;
+	while (++i < data->num_philos)
+		pthread_join(data->philosophers[i].thread, NULL);
+	pthread_join(monitor, NULL);
+	return (SUCCESS);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -21,22 +42,11 @@ int	main(int argc, char **argv)
 	if (init_data(&data, argc, argv) != SUCCESS)
 		return (ERROR);
 	if (init_mutex(&data) != SUCCESS)
-	{
-		clean_up(&data);
-		return (ERROR);
-	}
+		return (clean_up(&data), ERROR);
 	if (init_philosophers(&data) != SUCCESS)
-	{
-		clean_up(&data);
-		return (ERROR);
-	}
-	printf("Initialization successful with:\n");
-	printf("Philosophers: %d\n", data.num_philos);
-	printf("Time to die: %d\n", data.time_to_die);
-	printf("Time to eat: %d\n", data.time_to_eat);
-	printf("Time to sleep: %d\n", data.time_to_sleep);
-	if (argc == 6)
-		printf("Must eat count: %d\n", data.must_eat);
+		return (clean_up(&data), ERROR);
+	if (start_simulation(&data) != SUCCESS)
+		return (clean_up(&data), ERROR);
 	clean_up(&data);
 	return (SUCCESS);
 }

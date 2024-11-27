@@ -90,6 +90,8 @@ int	check_args(int argc, char **argv);
 //main.c
 
 //monitor.c
+bool	all_ate_enough(t_data *data);
+void	*monitor_routine(void *data_void);
 
 //routines.c
 int take_forks(t_philo *philo);
@@ -106,7 +108,7 @@ void	clean_up(t_data *data);
 
 //time.c
 long long time_diff(long long past, long long present);
-void precise_slepp(long long time);
+void precise_sleep(long long time);
 long long get_time(void);
 
 //utils.c
