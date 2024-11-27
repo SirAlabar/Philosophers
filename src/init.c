@@ -41,27 +41,34 @@ int init_data (t_data *data, int argc, char **argv)
 
 int init_mutex(t_data *data)
 {
-    int i;
+   int i;
 
-    i = -1;
-    while(++i < data->num_philos)
-    {
-        if(pthread_mutex_init(&data->forks[i], NULL) != 0)
-        {
-            while(--i >= 0)
-                pthread_mutex_destroy(&data->forks[i]);
-            return(error_msg("mutex initialization failed"));
-        }
-    }
-    if(pthread_mutex_init(&data->print_mutex, NULL) != 0)
-    {
-        pthread_mutex_destroy(&data->print_mutex);        
-        i = -1;
-        while(++i < data->num_philos)
-            pthread_mutex_destroy(&data->forks[i]);
-        return (error_msg("death mutex initialization failed"));   
-    }
-    return (SUCCESS);
+   i = -1;
+   while (++i < data->num_philos)
+   {
+       if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+       {
+           while (--i >= 0)
+               pthread_mutex_destroy(&data->forks[i]);
+           return (error_msg("mutex initialization failed"));
+       }
+   }
+   if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+   {
+       i = -1;
+       while (++i < data->num_philos)
+           pthread_mutex_destroy(&data->forks[i]);
+       return (error_msg("print mutex initialization failed"));
+   }
+   if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
+   {
+       pthread_mutex_destroy(&data->print_mutex);
+       i = -1;
+       while (++i < data->num_philos)
+           pthread_mutex_destroy(&data->forks[i]);
+       return (error_msg("death mutex initialization failed"));
+   }
+   return (SUCCESS);
 }
 
 int init_philosophers(t_data *data)

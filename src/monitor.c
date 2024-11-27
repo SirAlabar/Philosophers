@@ -31,39 +31,26 @@ bool	all_ate_enough(t_data *data)
 
 void	*monitor_routine(void *data_void)
 {
-	t_data		*data;
-	int			i;
-	long long	time_since_meal;
+    t_data *data = (t_data *)data_void;
+    int i;
+    long long time_since_meal;
 
-	data = (t_data *)data_void;
-	while (1)
-	{
-		i = -1;
-		while (++i < data->num_philos)
-		{
-			time_since_meal = time_diff(data->philosophers[i].last_meal, 
-				get_time());
-			if (time_since_meal >= data->time_to_die)
-			{
-				pthread_mutex_lock(&data->death_mutex);
-				if (!data->someone_died)
-				{
-					data->someone_died = true;
-					print_status(&data->philosophers[i], DIED);
-				}
-				pthread_mutex_unlock(&data->death_mutex);
-				return (NULL);
-			}
-			if (data->must_eat != -1 && 
-				data->philosophers[i].meals_eaten >= data->must_eat)
-			{
-				pthread_mutex_lock(&data->death_mutex);
-				data->someone_died = true;
-				pthread_mutex_unlock(&data->death_mutex);
-				return (NULL);
-			}
-		}
-		usleep(100);
-	}
-	return (NULL);
+    while (!data->someone_died)
+    {
+        i = -1;
+        while (++i < data->num_philos)
+        {
+            time_since_meal = time_diff(data->philosophers[i].last_meal, get_time());
+            if (time_since_meal >= data->time_to_die)
+            {
+                pthread_mutex_lock(&data->print_mutex);
+                data->someone_died = true;
+                printf("%lld %d died\n", time_diff(data->start_time, get_time()), data->philosophers[i].id);
+                pthread_mutex_unlock(&data->print_mutex);
+                return (NULL);
+            }
+        }
+        usleep(500);
+    }
+    return (NULL);
 }
