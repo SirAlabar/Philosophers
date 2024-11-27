@@ -51,7 +51,7 @@ void clean_up(t_data *data)
     if (data->print)
         sem_close(data->print);
     if (data->death)
-        sem_close(data->death)
+        sem_close(data->death);
     if (data->meals)
         sem_close(data->meals);
     clean_semaphores();

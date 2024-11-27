@@ -21,7 +21,7 @@ int parse_args(t_data *data, int argc, char **argv)
 int init_semaphores(t_data *data)
 {
     clean_semaphores();
-    data->forks = sem_opne(SEM_FORKS, O_CREAT, 0644, data->num_philos);
+    data->forks = sem_open(SEM_FORKS, O_CREAT, 0644, data->num_philos);
     if(data->forks == SEM_FAILED)
         return(error_msg("failed to create forks semaphore"));
     data->print = sem_open(SEM_PRINT, O_CREAT, 0644, 1);
@@ -33,7 +33,7 @@ int init_semaphores(t_data *data)
     data->meals = sem_open(SEM_MEALS, O_CREAT, 0644, 1);
     if(data->meals == SEM_FAILED)
         return(error_msg("failed to create meals semaphores"));
-    return(SUCESS);    
+    return(SUCCESS);    
 }
 
 int init_data (t_data *data, int argc, char **argv)
@@ -46,7 +46,7 @@ int init_data (t_data *data, int argc, char **argv)
         return(ERROR);
     if(init_philosophers(data) != SUCCESS)
         return(ERROR);
-    if (init_semaphores(data) != SUCESS)
+    if (init_semaphores(data) != SUCCESS)
     {
         free(data->philosophers);
         return (ERROR);
