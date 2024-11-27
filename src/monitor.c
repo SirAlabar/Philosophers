@@ -50,6 +50,13 @@ void	*monitor_routine(void *data_void)
                return (NULL);
            }
        }
+        if (data->must_eat != -1 && all_ate_enough(data))
+        {
+            pthread_mutex_lock(&data->death_mutex);
+            data->someone_died = true;
+            pthread_mutex_unlock(&data->death_mutex);
+            return (NULL);
+        }
        usleep(50);
        if (check_death(data))
            return (NULL);
