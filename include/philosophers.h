@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                      :+:      :+:    :+:   */
+/*   philosophers.h                                      :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+      */
+/*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 19:22:40 by hluiz-ma          #+#    #+#           */
-/*   Updated: 2024/01/09 19:22:40 by hluiz-ma         ###   ########.fr     */
+/*   Created: 2024/11/24 19:22:40 by hluiz-ma          #+#    #+#             */
+/*   Updated: 2024/11/27 19:22:40 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_data
     long long       start_time;     // Start time of simulation
     pthread_mutex_t *forks;         // Array of fork mutexes
     pthread_mutex_t print_mutex;    // Mutex for printing messages
+    pthread_mutex_t last_meal_mutex;// Mutex for check meal
     pthread_mutex_t death_mutex;    // Mutex for checking death condition
     t_philo         *philosophers;  // Array of philosopher structures
 }   t_data;
