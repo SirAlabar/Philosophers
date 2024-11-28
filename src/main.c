@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 19:19:56 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:07:37 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static int	handle_one_philo(t_data *data)
 	data->philosophers[0].last_meal = data->start_time;
 	print_status(&data->philosophers[0], FORK_TAKEN);
 	precise_sleep(data->time_to_die);
-	print_status(&data->philosophers[0], DIED);
+	printf("%lld %d died\n", time_diff(data->start_time, get_time()),
+		data->philosophers[0].id);
 	return (SUCCESS);
 }
 
