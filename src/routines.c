@@ -6,49 +6,49 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/27 19:22:40 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:59:50 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int take_forks(t_philo *philo)
+int	take_forks(t_philo *philo)
 {
 	if (philo->id % 2)
 		usleep(100);
 	if (philo->id == 1)
 	{
-        pthread_mutex_lock(philo->left_fork);
-        print_status(philo, FORK_TAKEN);
-        pthread_mutex_lock(philo->right_fork);
-        print_status(philo, FORK_TAKEN);
-    }
-    else
-    {
-        pthread_mutex_lock(philo->right_fork);
-        print_status(philo, FORK_TAKEN);
-        pthread_mutex_lock(philo->left_fork);
-        print_status(philo, FORK_TAKEN);
-    }
-    return (SUCCESS);
+		pthread_mutex_lock(philo->left_fork);
+		print_status(philo, FORK_TAKEN);
+		pthread_mutex_lock(philo->right_fork);
+		print_status(philo, FORK_TAKEN);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_status(philo, FORK_TAKEN);
+		pthread_mutex_lock(philo->left_fork);
+		print_status(philo, FORK_TAKEN);
+	}
+	return (SUCCESS);
 }
 
-void drop_forks(t_philo *philo)
+void	drop_forks(t_philo *philo)
 {
-    pthread_mutex_unlock(philo->left_fork);
-    pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 
-int eat(t_philo *philo)
+int	eat(t_philo *philo)
 {
-    print_status(philo, EATING);
-    pthread_mutex_lock(&philo->data->last_meal_mutex);
-    philo->last_meal = get_time();
-    pthread_mutex_unlock(&philo->data->last_meal_mutex);
-    precise_sleep(philo->data->time_to_eat);
-    philo->meals_eaten++;
-    drop_forks(philo);
-    return (SUCCESS);
+	print_status(philo, EATING);
+	pthread_mutex_lock(&philo->data->last_meal_mutex);
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->data->last_meal_mutex);
+	precise_sleep(philo->data->time_to_eat);
+	philo->meals_eaten++;
+	drop_forks(philo);
+	return (SUCCESS);
 }
 
 int	sleep_and_think(t_philo *philo)
@@ -74,7 +74,7 @@ void	*philosopher_routine(void *philosopher_void)
 			break ;
 		if (sleep_and_think(philo) != SUCCESS)
 			break ;
-       	usleep(100); 
+		usleep(100);
 	}
 	return (NULL);
 }

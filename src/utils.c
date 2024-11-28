@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 18:59:56 by hluiz-ma          #+#    #+#             */
+/*   Updated: 2024/11/28 19:32:46 by hluiz-ma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
@@ -26,8 +37,17 @@ int	ft_atoi(const char *str)
 	return (res * sing);
 }
 
-int error_msg(char *str)
+void	destroy_forks(t_data *data, int count)
 {
-    printf("%s Error: %s%s\n", RED, str, RESET);
-    return (ERROR);
+	int	i;
+
+	i = -1;
+	while (++i < count)
+		pthread_mutex_destroy(&data->forks[i]);
+}
+
+int	error_msg(char *str)
+{
+	printf("%s Error: %s%s\n", RED, str, RESET);
+	return (ERROR);
 }

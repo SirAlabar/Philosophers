@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/26 19:22:40 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:14:47 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,11 @@ int	check_philo_number(char *str)
 void	check_min_values(char **argv)
 {
 	if (ft_atoi(argv[2]) < 61)
-		printf("%sWarning: time_to_die below 60ms might cause timing issues%s\n",
-			YELLOW, RESET);
+		printf(WARNING_ARGS, YELLOW, RESET);
 	if (ft_atoi(argv[3]) < 61)
-		printf("%sWarning: time_to_eat below 60ms might cause timing issues%s\n",
-			YELLOW, RESET);
+		printf(WARNING_ARGS, YELLOW, RESET);
 	if (ft_atoi(argv[4]) < 61)
-		printf("%sWarning: time_to_sleep below 60ms might cause timing issues%s\n",
-			YELLOW, RESET);
+		printf(WARNING_ARGS, YELLOW, RESET);
 }
 
 int	check_args(int argc, char **argv)

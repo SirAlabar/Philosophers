@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 18:59:30 by hluiz-ma          #+#    #+#             */
+/*   Updated: 2024/11/28 19:02:09 by hluiz-ma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 int	ft_atoi(const char *str)
@@ -25,48 +37,48 @@ int	ft_atoi(const char *str)
 	return (res * sing);
 }
 
-int error_msg(char *str)
+int	error_msg(char *str)
 {
-    printf("%s Error: %s%s\n", RED, str, RESET);
-    return (ERROR);
+	printf("%s Error: %s%s\n", RED, str, RESET);
+	return (ERROR);
 }
 
-void clean_semaphores(void)
+void	clean_semaphores(void)
 {
-    sem_unlink(SEM_FORKS);
-    sem_unlink(SEM_PRINT);
-    sem_unlink(SEM_DEATH);
-    sem_unlink(SEM_MEALS);
+	sem_unlink(SEM_FORKS);
+	sem_unlink(SEM_PRINT);
+	sem_unlink(SEM_DEATH);
+	sem_unlink(SEM_MEALS);
 }
 
-void clean_up(t_data *data)
+void	clean_up(t_data *data)
 {
-    if (data->philosophers)
-    {
-        kill_processes(data);
-        free(data->philosophers);
-    }
-    if (data->forks)
-        sem_close(data->forks);
-    if (data->print)
-        sem_close(data->print);
-    if (data->death)
-        sem_close(data->death);
-    if (data->meals)
-        sem_close(data->meals);
-    clean_semaphores();
+	if (data->philosophers)
+	{
+		kill_processes(data);
+		free(data->philosophers);
+	}
+	if (data->forks)
+		sem_close(data->forks);
+	if (data->print)
+		sem_close(data->print);
+	if (data->death)
+		sem_close(data->death);
+	if (data->meals)
+		sem_close(data->meals);
+	clean_semaphores();
 }
 
-void kill_processes(t_data *data)
+void	kill_processes(t_data *data)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while(++i < data->num_philos)
-    {
-        if (data->philosophers[i].pid > 0)
-            kill(data->philosophers[i].pid, SIGKILL);
-    }
-    while(i--)
-        waitpid(-1, NULL, 0);
+	i = -1;
+	while (++i < data->num_philos)
+	{
+		if (data->philosophers[i].pid > 0)
+			kill(data->philosophers[i].pid, SIGKILL);
+	}
+	while (i--)
+		waitpid(-1, NULL, 0);
 }
