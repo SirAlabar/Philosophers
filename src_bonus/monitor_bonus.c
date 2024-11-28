@@ -33,29 +33,28 @@ bool all_ate_enough(t_data *data)
 
 void *monitor_routine(void *philosopher_void)
 {
-    t_philo *philo;
-    long long time;
+   t_philo *philo;
+   long long time;
 
-    philo = (t_philo *)philosopher_void;
-    while (1)
-    {
-        time = time_diff(philo->last_meal, get_time());
-        if (time >= philo->data->time_to_die && !check_death(philo->data))
-        {
-            sem_wait(philo->data->print);
-            sem_wait(philo->data->death);
-            philo->data->someone_died = true;
-            printf("%lld %d died\n", time_diff(philo->data->start_time, 
-                get_time()), philo->id);
-            sem_post(philo->data->death);
-            exit(1);
-        }
-        if (philo->data->must_eat != -1 && 
-            philo->meals_eaten >= philo->data->must_eat)
-        {
-            exit(0);
-        }
-        usleep(100);
-    }
-    return (NULL);
+   philo = (t_philo *)philosopher_void;
+   while (1)
+   {
+       sem_wait(philo->data->death);
+       time = time_diff(philo->last_meal, get_time());
+       if (time >= philo->data->time_to_die)
+       {
+           sem_wait(philo->data->print);
+           printf(RED"%lld %d died %s"RESET"\n", 
+               time_diff(philo->data->start_time, get_time()), 
+               philo->id, "💀");
+           sem_post(philo->data->death);
+           exit(EXIT_FAILURE);
+       }
+       sem_post(philo->data->death);
+       if (philo->data->must_eat != -1 && 
+           philo->meals_eaten >= philo->data->must_eat)
+           exit(EXIT_SUCCESS);
+       usleep(100);
+   }
+   return (NULL);
 }

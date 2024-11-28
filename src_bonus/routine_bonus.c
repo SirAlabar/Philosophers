@@ -11,13 +11,15 @@ int take_forks(t_philo *philo)
 
 int eat(t_philo *philo)
 {
-    print_status(philo, EATING);
-    philo->last_meal = get_time();
-    precise_sleep(philo->data->time_to_eat);
-    philo->meals_eaten++;
-    sem_post(philo->data->forks);
-    sem_post(philo->data->forks); 
-    return (SUCCESS);
+   sem_wait(philo->data->death);
+   print_status(philo, EATING);
+   philo->last_meal = get_time();
+   sem_post(philo->data->death);
+   precise_sleep(philo->data->time_to_eat);
+   philo->meals_eaten++;
+   sem_post(philo->data->forks);
+   sem_post(philo->data->forks);
+   return (SUCCESS);
 }
 
 int sleep_and_think(t_philo *philo)
@@ -31,7 +33,7 @@ int sleep_and_think(t_philo *philo)
 void philosopher_routine(t_philo *philo)
 {
     if (philo->id % 2 == 0)
-        usleep(100);
+        usleep(50);
     while (1)
     {
         take_forks(philo);
@@ -40,6 +42,6 @@ void philosopher_routine(t_philo *philo)
         if (philo->data->must_eat != -1 && 
             philo->meals_eaten >= philo->data->must_eat)
             exit(SUCCESS);
-        usleep(100);
+        usleep(50);
     }
 }

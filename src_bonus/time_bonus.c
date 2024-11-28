@@ -16,7 +16,7 @@ void precise_sleep(long long time)
         elapsed = time_diff(start, get_time());
         if(elapsed >= time)
             break;
-        usleep(100);
+        usleep(50);
     }
 }
 
