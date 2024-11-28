@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 22:18:00 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:20:19 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (check_args(argc, argv) != SUCCESS)
-		normi return (ERROR);
+		return (ERROR);
 	if (init_data(&data, argc, argv) != SUCCESS)
 		return (ERROR);
 	if (init_mutex(&data) != SUCCESS)

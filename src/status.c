@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 22:18:23 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:21:19 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	print_status(t_philo *philo, t_state state)
 }*/
 void	clean_up(t_data *data)
 {
+	int i;
+	
 	if (data->philosophers)
 	{
 		i = -1;
