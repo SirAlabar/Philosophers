@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 18:59:52 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:52:18 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,52 @@ bool	check_death(t_data *data)
 	pthread_mutex_unlock(&data->death_mutex);
 	return (died);
 }
-
+/*
 void	print_status(t_philo *philo, t_state state)
 {
 	long long	time;
+	long long	time;
 
-	pthread_mutex_lock(&philo->data->print_mutex);
-	if (!check_death(philo->data))
+	pthread_mutex_lock(&philo->data->death_mutex);
+	if (!philo->data->someone_died)
 	{
+		pthread_mutex_lock(&philo->data->print_mutex);
 		time = time_diff(philo->data->start_time, get_time());
 		if (state == FORK_TAKEN)
-			printf(GREEN "%lld %d has taken a fork %s\n" RESET, time, philo->id,
-				"🍴");
+			printf(GREEN "%lld %d has taken a fork %s\n" RESET,
+				time, philo->id, "🍴");
 		else if (state == EATING)
-			printf(YELLOW "%lld %d is eating %s\n" RESET, time, philo->id, "🍝");
+			printf(YELLOW "%lld %d is eating %s\n" RESET,
+				time, philo->id, "🍝");
 		else if (state == SLEEPING)
-			printf(BLUE "%lld %d is sleeping %s\n" RESET, time, philo->id, "😴");
+			printf(BLUE "%lld %d is sleeping %s\n" RESET,
+				time, philo->id, "😴");
 		else if (state == THINKING)
-			printf(CYAN "%lld %d is thinking %s\n" RESET, time, philo->id, "💭");
+			printf(CYAN "%lld %d is thinking %s\n" RESET,
+				time, philo->id, "💭");
+		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
-	pthread_mutex_unlock(&philo->data->print_mutex);
+	pthread_mutex_unlock(&philo->data->death_mutex);
+}*/
+
+void	print_status(t_philo *philo, t_state state)
+{
+	pthread_mutex_lock(&philo->data->death_mutex);
+	if (!philo->data->someone_died)
+	{
+		pthread_mutex_lock(&philo->data->print_mutex);
+		time = time_diff(philo->data->start_time, get_time());
+		if (state == FORK_TAKEN)
+			printf("%lld %d has taken a fork\n", time, philo->id);
+		else if (state == EATING)
+			printf("%lld %d is eating\n", time, philo->id);
+		else if (state == SLEEPING)
+			printf("%lld %d is sleeping\n", time, philo->id);
+		else if (state == THINKING)
+			printf("%lld %d is thinking\n", time, philo->id);
+		pthread_mutex_unlock(&philo->data->print_mutex);
+	}
+	pthread_mutex_unlock(&philo->data->death_mutex);
 }
 
 void	clean_up(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 19:34:24 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:30:29 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				clean_up(t_data *data);
 
 // time.c
 long long			time_diff(long long past, long long present);
-void				precise_sleep(long long time);
+void				precise_sleep(size_t time);
 long long			get_time(void);
 
 // utils.c
