@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 19:45:58 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:15:01 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ bool	check_philosopher_death(t_data *data, int i)
 		{
 			data->someone_died = true;
 			pthread_mutex_lock(&data->print_mutex);
-			printf("%lld %d died\n", time_diff(data->start_time, get_time()),
-				data->philosophers[i].id);
+			printf(WHITE "%4lld " RESET BOLD "%2i " RED "%16s %s\n" RESET, time,
+				data->philosophers[i].id, "died", "💀");
 			pthread_mutex_unlock(&data->print_mutex);
 		}
 		pthread_mutex_unlock(&data->death_mutex);

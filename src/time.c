@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:59:54 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 21:30:16 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:58:47 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ long long	time_diff(long long past, long long present)
 	return (present - past);
 }
 
-void	precise_sleep(size_t time)
+void	precise_sleep(long long time)
 {
-	size_t	start;
+	long long	start;
 
 	start = get_time();
 	while ((get_time() - start) < time)

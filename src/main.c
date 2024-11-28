@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 21:07:37 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:18:00 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ static int	start_threads(t_data *data)
 
 static int	handle_one_philo(t_data *data)
 {
+	long long	time;
+
+	time = get_time();
 	data->start_time = get_time();
 	data->philosophers[0].last_meal = data->start_time;
 	print_status(&data->philosophers[0], FORK_TAKEN);
 	precise_sleep(data->time_to_die);
-	printf("%lld %d died\n", time_diff(data->start_time, get_time()),
-		data->philosophers[0].id);
+	printf(WHITE "%4lld " RESET BOLD "%2i " RED "%16s %s\n" RESET, time,
+		data->philosophers[0].id, "died", "💀");
 	return (SUCCESS);
 }
 
@@ -51,7 +54,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (check_args(argc, argv) != SUCCESS)
-		return (ERROR);
+		normi return (ERROR);
 	if (init_data(&data, argc, argv) != SUCCESS)
 		return (ERROR);
 	if (init_mutex(&data) != SUCCESS)

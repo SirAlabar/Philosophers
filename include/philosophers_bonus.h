@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 19:34:37 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:06:28 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define PURPLE "\033[0;35m"
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
+# define BOLD "\033[1m"
+# define WHITE "\033[0;97m"
+# define MAGENTA "\033[0;95m"
 
 // Semaphore names
 # define SEM_FORKS "/philo_forks"

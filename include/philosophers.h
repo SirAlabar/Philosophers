@@ -6,7 +6,7 @@
 /*   By: hluiz-ma <hluiz-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:22:40 by hluiz-ma          #+#    #+#             */
-/*   Updated: 2024/11/28 21:30:29 by hluiz-ma         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:06:25 by hluiz-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 # define PURPLE "\033[0;35m"
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
+# define BOLD "\033[1m"
+# define WHITE "\033[0;97m"
+# define MAGENTA "\033[0;95m"
 
 // Philosopher states
 typedef enum e_state
@@ -110,7 +113,7 @@ void				clean_up(t_data *data);
 
 // time.c
 long long			time_diff(long long past, long long present);
-void				precise_sleep(size_t time);
+void				precise_sleep(long long time);
 long long			get_time(void);
 
 // utils.c
