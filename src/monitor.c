@@ -49,7 +49,7 @@ void	*monitor_routine(void *data_void)
                data->someone_died = true;
                pthread_mutex_unlock(&data->death_mutex);
                pthread_mutex_lock(&data->print_mutex); 
-               printf("%lld %d died\n", time_diff(data->start_time, get_time()), data->philosophers[i].id);
+                printf(RED"%lld %d died %s"RESET"\n", time_diff(data->start_time, get_time()), data->philosophers[i].id, "💀");
                pthread_mutex_unlock(&data->print_mutex);
                return (NULL);
            }

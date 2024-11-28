@@ -29,17 +29,15 @@ void print_status(t_philo *philo, t_state state)
     pthread_mutex_lock(&philo->data->print_mutex);
     if (!check_death(philo->data))
     {
-        time = time_diff(philo->data->start_time, get_time());
-        if (state == FORK_TAKEN)
-			printf("%lld %d has taken a fork\n", time, philo->id);
+		time = time_diff(philo->data->start_time, get_time());
+		if (state == FORK_TAKEN)
+		printf(GREEN"%lld %d has taken a fork %s\n"RESET, time, philo->id, "🍴");
 		else if (state == EATING)
-			printf("%lld %d is eating\n", time, philo->id);
+		printf(YELLOW"%lld %d is eating %s\n"RESET, time, philo->id, "🍝");
 		else if (state == SLEEPING)
-			printf("%lld %d is sleeping\n", time, philo->id);
+		printf(BLUE"%lld %d is sleeping %s\n"RESET, time, philo->id, "😴");
 		else if (state == THINKING)
-			printf("%lld %d is thinking\n", time, philo->id);
-		else if (state == DIED)
-			printf("%lld %d died\n", time, philo->id);
+		printf(CYAN"%lld %d is thinking %s\n"RESET, time, philo->id, "💭");
     }
     pthread_mutex_unlock(&philo->data->print_mutex);
 }
