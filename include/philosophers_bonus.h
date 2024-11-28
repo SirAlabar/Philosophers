@@ -63,6 +63,7 @@ typedef struct s_philo
     long long       last_meal;      // Timestamp of last meal
     t_state         state;          // Current state of the philosopher
     pid_t           pid;            // Process ID
+    sem_t           *meal_lock;     //last meal lock
     struct s_data   *data;          // Pointer to shared data
 } t_philo;
 
