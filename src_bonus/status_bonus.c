@@ -14,19 +14,22 @@
 
 void	print_status(t_philo *philo, t_state state)
 {
+	long long	time;
+
 	sem_wait(philo->data->print);
+	time = time_diff(philo->data->start_time, get_time());
 	if (state == FORK_TAKEN)
-		printf(GREEN "%lld %d has taken a fork %s\n" RESET,
-			time_diff(philo->data->start_time, get_time()), philo->id, "🍴");
+		printf(WHITE "%4lld " RESET BOLD "%2i " GREEN "%16s %s\n" RESET,
+			time, philo->id, "has taken a fork", "🍴");
 	else if (state == EATING)
-		printf(YELLOW "%lld %d is eating %s\n" RESET,
-			time_diff(philo->data->start_time, get_time()), philo->id, "🍝");
+		printf(WHITE "%4lld " RESET BOLD "%2i " BLUE "%16s %s\n" RESET,
+			time, philo->id, "is eating", "🍝");
 	else if (state == SLEEPING)
-		printf(BLUE "%lld %d is sleeping %s\n" RESET,
-			time_diff(philo->data->start_time, get_time()), philo->id, "😴");
+		printf(WHITE "%4lld " RESET BOLD "%2i " CYAN "%16s %s\n" RESET,
+			time, philo->id, "is sleeping", "😴");
 	else if (state == THINKING)
-		printf(CYAN "%lld %d is thinking %s\n" RESET,
-			time_diff(philo->data->start_time, get_time()), philo->id, "💭");
+		printf(WHITE "%4lld " RESET BOLD "%2i " MAGENTA "%16s %s\n" RESET,
+			time, philo->id, "is thinking", "💭");
 	if (state != DIED)
 		sem_post(philo->data->print);
 }
