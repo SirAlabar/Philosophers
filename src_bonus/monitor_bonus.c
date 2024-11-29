@@ -55,13 +55,13 @@ void	*monitor_routine(void *philosopher_void)
 		{
 			sem_wait(philo->data->print);
 			time = time_diff(philo->data->start_time, get_time());
-			printf(WHITE "%4lld " RESET BOLD "%2i " RED "%16s %s\n" RESET,
-				time, philo->id, "died", "💀");
+			printf(WHITE "%4lld " RESET BOLD "%2i " RED "%16s %s\n" RESET, time,
+				philo->id, "died", "💀");
 			exit(EXIT_FAILURE);
 		}
 		sem_post(philo->data->death);
-		if (philo->data->must_eat != -1 && 
-			philo->meals_eaten >= philo->data->must_eat)
+		if (philo->data->must_eat != -1
+			&& philo->meals_eaten >= philo->data->must_eat)
 			exit(EXIT_SUCCESS);
 		usleep(50);
 	}

@@ -55,6 +55,7 @@ void	print_status(t_philo *philo, t_state state)
 void	print_status(t_philo *philo, t_state state)
 {
 	int	i;
+	int	i;
 
 	pthread_mutex_lock(&philo->data->death_mutex);
 	if (!philo->data->someone_died)
@@ -75,8 +76,6 @@ void	print_status(t_philo *philo, t_state state)
 }*/
 void	clean_up(t_data *data)
 {
-	int i;
-	
 	if (data->philosophers)
 	{
 		i = -1;
